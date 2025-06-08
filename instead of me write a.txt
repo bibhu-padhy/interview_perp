@@ -1,0 +1,3 @@
+instead of me write a script to check my account activity i will create a MCP to check my solana balance and be aware if what type of tx is happening and category them by contract like if a swap 7tx to using jup it will put them to a category think like we need to iterate through all the tx and will find out all the contract and group the similar contract (We need to decide how to do tha later)
+and return a json data like that 
+
