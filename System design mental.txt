@@ -1,0 +1,149 @@
+Here's the systematic approach and mindset for tackling any system design question:
+
+## The Universal Framework (SNAKE Method)
+
+**S** - Scope & Requirements  
+**N** - Numbers & Scale  
+**A** - Architecture & Components  
+**K** - Key Design Decisions  
+**E** - Edge Cases & Extensions
+
+## Step-by-Step Approach
+
+### 1. Clarify Requirements (First 5-10 minutes)
+**Always ask these questions:**
+- What's the core functionality? (Be specific)
+- Who are the users and how many?
+- What's the scale? (DAU, requests/second, data size)
+- What are we optimizing for? (Speed, consistency, availability)
+- Any constraints? (budget, technology, compliance)
+
+**Example:** For "Design Twitter"
+- Post tweets, follow users, see timeline
+- 300M users, 100M DAU
+- 5000 tweets/second, 300K reads/second
+- Optimize for read speed
+- Must handle celebrity tweets (viral content)
+
+### 2. Estimate Scale (Back-of-envelope calculations)
+**Always calculate:**
+- Storage requirements
+- Bandwidth needs  
+- QPS (Queries Per Second)
+- Memory requirements
+
+**Mental math tricks:**
+- 1M requests/day ≈ 12 requests/second
+- 1B users ≈ 100M active users
+- Text: ~100 bytes, Image: ~1MB, Video: ~100MB
+- Read:Write ratio usually 100:1 or 1000:1
+
+### 3. High-Level Design
+**Start simple, then add complexity:**
+- Draw basic boxes: Client → Load Balancer → App Server → Database
+- Identify major components
+- Show data flow
+- Don't dive into details yet
+
+### 4. Deep Dive into Components
+**For each component, discuss:**
+- Database choice (SQL vs NoSQL)
+- Caching strategy
+- Load balancing
+- Data models/schemas
+
+### 5. Scale the Design
+**Common scaling patterns:**
+- Horizontal scaling (add more servers)
+- Database sharding/partitioning
+- Caching layers (Redis/Memcached)
+- CDN for static content
+- Message queues for async processing
+- Microservices architecture
+
+## Universal Patterns & Solutions
+
+### Database Patterns
+- **User data**: SQL (ACID properties needed)
+- **Activity feeds**: NoSQL (high write volume)
+- **Analytics**: Time-series DB or data warehouse
+- **Search**: Elasticsearch
+- **Caching**: Redis/Memcached
+
+### Common Architectures
+- **Read-heavy**: Add read replicas, caching
+- **Write-heavy**: Sharding, message queues
+- **Global**: Multi-region with CDN
+- **Real-time**: WebSockets, message queues
+
+### Scaling Checklist
+1. Load balancer
+2. Database replication
+3. Caching layer
+4. CDN for static content
+5. Database sharding
+6. Microservices
+7. Message queues
+8. Auto-scaling
+
+## The Right Mindset
+
+### 1. Think Like a Product Manager First
+- Understand the business problem
+- Focus on user experience
+- Ask "Why?" not just "How?"
+
+### 2. Start Simple, Iterate
+- Don't jump to complex solutions
+- Build MVP first, then scale
+- "Let's start with a simple approach and then optimize"
+
+### 3. Make Trade-offs Explicit
+- "We could do X for better performance but Y for consistency"
+- Explain why you chose one approach over another
+- Nothing is free - every decision has trade-offs
+
+### 4. Think in Layers
+- **Presentation Layer**: Mobile/Web clients
+- **API Layer**: Load balancer, API gateway
+- **Business Logic**: Application servers
+- **Data Layer**: Databases, caches
+- **Infrastructure**: Monitoring, deployment
+
+### 5. Consider the CAP Theorem
+- **Consistency**: All nodes see same data
+- **Availability**: System remains operational
+- **Partition tolerance**: System continues despite network failures
+- You can only guarantee 2 out of 3
+
+## Common Mistakes to Avoid
+
+1. **Jumping to implementation details too early**
+2. **Not asking clarifying questions**
+3. **Over-engineering for scale you don't need**
+4. **Ignoring non-functional requirements**
+5. **Not considering monitoring/observability**
+6. **Forgetting about security**
+7. **Not discussing deployment strategy**
+
+## Power Phrases to Use
+
+- "Let's start simple and then see where we need to optimize"
+- "What are we optimizing for here - speed, consistency, or availability?"
+- "This approach trades X for Y because..."
+- "We could handle this with eventual consistency since..."
+- "For this scale, we'd need to consider sharding/partitioning"
+- "Let's add monitoring here to track..."
+
+## The Meta-Strategy
+
+**Remember:** The interviewer wants to see your thought process, not perfect solutions. They want to see:
+- How you break down complex problems
+- How you handle ambiguity  
+- How you make trade-offs
+- How you communicate technical concepts
+- How you think about scale and edge cases
+
+**Golden rule:** Communicate your thinking out loud. Say "I'm thinking about whether to use SQL or NoSQL here because..." rather than silently deciding.
+
+The key is having a structured approach you can apply to ANY system design question, then adapting based on the specific requirements and constraints.
